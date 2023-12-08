@@ -22,13 +22,13 @@ def main():
  
     # Exit if video not opened.
     if not video.isOpened():
-        print "Could not open video"
+        print("Could not open video")
         sys.exit()
  
     # Read first frame.
     ok, frame = video.read()
     if not ok:
-        print 'Cannot read video file'
+        print('Cannot read video file')
         sys.exit()
 
     
@@ -47,7 +47,7 @@ def main():
  
     # Uncomment the line below to select a different bounding box
     bbox = cv2.selectROI(frame, False)
-    print bbox
+    print(bbox)
 
     # Initialize tracker with first frame and bounding box
     ok = tracker.init(frame, bbox)
@@ -79,9 +79,9 @@ def main():
     #cv2.line(frame,center_i,center_f,(0,0,255),2)
     #cv2.imshow("Final", frame)
 
-    print "Initial center: " + str(center_i)
-    print "Final center: " + str(center_f)
-    print "Displacement: " + str(np.linalg.norm(center_f-center_i))
+    print("Initial center: " + str(center_i))
+    print("Final center: " + str(center_f))
+    print("Displacement: " + str(np.linalg.norm(center_f-center_i)))
 
 if __name__ == "__main__":
     main()

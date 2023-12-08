@@ -6,7 +6,7 @@
 """
 
 from SaveState import guisave, guirestore
-from PyQt4 import QtGui, QtCore, uic
+from PyQt5 import QtWidgets, QtCore, uic
 
 import camera
 import CameraSettings
@@ -24,12 +24,13 @@ import sys
 # cameras. (Less risk of hitting USB bandwidth.)
 CAMERA_ACTIVATION_TIME_SECONDS = 5
 
-HOME_FOLDER = "C:\Users\europaexpts\Documents\code\CameraWorkbench"
+# HOME_FOLDER = "C:\Users\europaexpts\Documents\code\CameraWorkbench"
+HOME_FOLDER = os. getcwd()
 
-class MainWindow(QtGui.QMainWindow):
+class MainWindow(QtWidgets.QMainWindow):
     """MainWindow initializes UI objects like buttons, text/check/spin boxes, etc."""
     def __init__(self, worker, change_signal):
-        QtGui.QMainWindow.__init__(self)
+        QtWidgets.QMainWindow.__init__(self)
         self.ui = uic.loadUi('ui/main.ui', self)
         self.setWindowTitle("Camera Workbench")
         self.setFixedSize(self.size())
@@ -48,9 +49,9 @@ class MainWindow(QtGui.QMainWindow):
     def populateDeviceList(self):
         self.deviceList.clear()
         for camera in self.worker.cameras:
-            item = QtGui.QListWidgetItem(str(camera.deviceNameStr))
+            item = QtWidgets.QListWidgetItem(str(camera.deviceNameStr))
             if camera.camera.disabled:
-                item.setForeground(QtGui.QColor(255, 0, 0))
+                item.setForeground(QtWidgets.QColor(255, 0, 0))
             self.deviceList.addItem(item)
 
 
@@ -189,7 +190,7 @@ class Worker(QtCore.QThread):
                 cv2.destroyWindow(title)
         except AttributeError as e:
             print(e)
-            print "A camera was detached!"
+            print("A camera was detached!")
             self.kill()
 
     def captureAll(self):
@@ -258,7 +259,7 @@ class Worker(QtCore.QThread):
         for cam in self.cameras:
             cam.camera.close()
 
-class Application(QtGui.QApplication):
+class Application(QtWidgets.QApplication):
     change_detected = QtCore.pyqtSignal()
     def __init__(self, args):
         super(Application, self).__init__(["Camera Workbench"])

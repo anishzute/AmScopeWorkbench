@@ -15,7 +15,7 @@
 # ===============================================================================
 
 from numpy import zeros, uint8, uint32, asarray, float32
-from cStringIO import StringIO
+from io import StringIO
 from PIL import Image as pil
 
 import os

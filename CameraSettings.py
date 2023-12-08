@@ -6,12 +6,12 @@
 """
 
 from SaveState import guisave, guirestore, guidebug
-from PyQt4 import QtGui, QtCore, uic
+from PyQt5 import QtWidgets, QtCore, uic
 from camera import AmscopeCamera, WebCamera
 
 import time
 
-class AbstractCameraSettings(QtGui.QWidget):
+class AbstractCameraSettings(QtWidgets.QWidget):
     def __init__(self, camera, device, change_signal):
         self.change_detected = change_signal
         self.setWindowTitle("Camera Settings")
@@ -92,7 +92,7 @@ class AbstractCameraSettings(QtGui.QWidget):
 
 class WebCameraSettings(AbstractCameraSettings):
     def __init__(self, camera, device, change_signal):
-        QtGui.QWidget.__init__(self)
+        QtWidgets.QWidget.__init__(self)
         AbstractCameraSettings.__init__(self, camera, device, change_signal)
         ui_path = "ui/parameters"
         self.ui = uic.loadUi(ui_path + '.ui', self)
@@ -127,7 +127,7 @@ class WebCameraSettings(AbstractCameraSettings):
 
 class AmscopeCameraSettings(AbstractCameraSettings):
     def __init__(self, camera, device, change_signal):
-        QtGui.QWidget.__init__(self)
+        QtWidgets.QWidget.__init__(self)
         AbstractCameraSettings.__init__(self, camera, device, change_signal)
         ui_path = "ui/amscope_parameters"
         self.ui = uic.loadUi(ui_path + '.ui', self)

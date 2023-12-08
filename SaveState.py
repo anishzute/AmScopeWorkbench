@@ -5,7 +5,7 @@
 #===================================================================
 
 
-from PyQt4.QtGui import *
+from PyQt5.QtWidgets import *
 import inspect
 from datetime import datetime
 
